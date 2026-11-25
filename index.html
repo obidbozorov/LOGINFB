@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="description" content="Obidjon Bozorov — kiberxavfsizlik bo‘yicha mutaxassis. Xavfsizroq raqamli muhit uchun amaliy yechimlar.">
+  <title>Obidjon Bozorov — Kiberxavfsizlik mutaxassisi</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0d12;
+      --surface: #10151d;
+      --surface-raised: #141b24;
+      --line: rgba(195, 216, 226, .12);
+      --text: #edf4f2;
+      --muted: #9aa9ad;
+      --accent: #b6f36b;
+      --accent-dark: #172512;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 82% 8%, rgba(80, 119, 72, .12), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(182, 243, 107, .45);
+      border-radius: 10px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav { display: flex; align-items: center; gap: 34px; }
+    .nav a { color: var(--muted); font-size: 13px; transition: color .2s ease; }
+    .nav a:hover, .nav a:focus-visible { color: var(--accent); }
+    .nav .nav-contact { color: var(--text); }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 8px 11px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 610px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 56px;
+      padding-block: 76px 88px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font: 11px var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(182, 243, 107, .7);
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 23px 0 20px;
+      font-size: clamp(46px, 6.7vw, 78px);
+      line-height: 1.04;
+      letter-spacing: -.065em;
+      font-weight: 650;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-copy {
+      max-width: 530px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .button:hover { transform: translateY(-2px); border-color: rgba(182, 243, 107, .55); }
+    .button-primary { border-color: var(--accent); background: var(--accent); color: #10150b; }
+    .button-primary:hover { background: #c5ff7c; }
+    .arrow { font-size: 17px; line-height: 1; }
+
+    .visual {
+      position: relative;
+      min-height: 370px;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-grid {
+      position: absolute;
+      inset: 12% 2%;
+      opacity: .48;
+      background-image: linear-gradient(rgba(185, 210, 204, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(185, 210, 204, .07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse, #000 15%, transparent 72%);
+    }
+
+    .orbit {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(182, 243, 107, .22);
+      border-radius: 50%;
+      box-shadow: 0 0 85px rgba(133, 188, 94, .08), inset 0 0 45px rgba(133, 188, 94, .045);
+    }
+
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(182, 243, 107, .13);
+      border-radius: 50%;
+    }
+
+    .orbit::before { inset: 24px; }
+    .orbit::after { inset: -25px; border-color: rgba(195, 216, 226, .08); }
+
+    .shield {
+      width: 116px;
+      height: 136px;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      filter: drop-shadow(0 0 25px rgba(182, 243, 107, .22));
+    }
+
+    .orbit-label {
+      position: absolute;
+      right: -42px;
+      bottom: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(16, 21, 29, .92);
+      color: var(--muted);
+      font: 10px var(--mono);
+      letter-spacing: .07em;
+    }
+
+    .section { padding-block: 86px; border-top: 1px solid var(--line); }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
+    .section-kicker { color: var(--accent); font: 11px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    h2 { margin: 11px 0 0; font-size: clamp(30px, 4vw, 43px); letter-spacing: -.05em; line-height: 1.15; }
+    .section-intro { max-width: 425px; margin: 0; color: var(--muted); font-size: 14px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; }
+    .about-text { color: var(--muted); font-size: 15px; line-height: 1.9; }
+    .about-text p { margin: 0 0 18px; }
+    .about-text strong { color: var(--text); font-weight: 550; }
+    .principles { display: grid; gap: 12px; }
+    .principle {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(16, 21, 29, .65);
+      color: #d3dddb;
+      font-size: 13px;
+    }
+    .principle-index { color: var(--accent); font: 11px var(--mono); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .skill-card {
+      min-height: 205px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: linear-gradient(145deg, rgba(20, 27, 36, .86), rgba(16, 21, 29, .66));
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(182, 243, 107, .35); }
+    .skill-icon { margin-bottom: 23px; color: var(--accent); font: 17px var(--mono); }
+    .skill-card h3 { margin: 0 0 9px; font-size: 16px; letter-spacing: -.02em; }
+    .skill-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.75; }
+
+    .approach {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface);
+    }
+    .approach-copy { padding: 38px; }
+    .approach-copy h3 { max-width: 390px; margin: 12px 0 15px; font-size: 28px; letter-spacing: -.04em; line-height: 1.25; }
+    .approach-copy p { max-width: 420px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+    .terminal {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 260px;
+      padding: 30px;
+      border-left: 1px solid var(--line);
+      background: radial-gradient(ellipse at center, rgba(182, 243, 107, .045), transparent 70%), #0d1117;
+      font: 12px/2.1 var(--mono);
+    }
+    .terminal-bar { display: flex; gap: 6px; margin-bottom: 18px; }
+    .terminal-bar i { width: 7px; height: 7px; border-radius: 50%; background: #3a4549; }
+    .terminal-bar i:first-child { background: #b6f36b; }
+    .terminal-line { color: #8d9b9d; }
+    .terminal-line span { color: var(--accent); }
+    .terminal-line b { color: #e4ece8; font-weight: 400; }
+    .terminal-cursor { display: inline-block; width: 7px; height: 14px; margin-left: 4px; background: var(--accent); vertical-align: -2px; animation: blink 1s steps(2, start) infinite; }
+    @keyframes blink { to { visibility: hidden; } }
+
+    .contact-section { padding-block: 75px; }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 37px 40px;
+      border: 1px solid rgba(182, 243, 107, .23);
+      border-radius: 10px;
+      background: radial-gradient(ellipse at 10% 50%, rgba(182, 243, 107, .09), transparent 50%), var(--surface);
+    }
+    .contact-card h2 { margin-top: 9px; font-size: clamp(26px, 3.5vw, 36px); }
+    .contact-card p { max-width: 480px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .contact-note { min-width: 185px; color: var(--muted); font-size: 12px; text-align: right; }
+    .contact-note strong { display: block; margin-bottom: 5px; color: var(--accent); font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    footer { border-top: 1px solid var(--line); }
+    .footer-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #738187; font-size: 11px; }
+    .footer-mark { color: var(--muted); font-family: var(--mono); }
+
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .topbar { height: 70px; }
+      .menu-toggle { display: inline-flex; }
+      .nav {
+        position: absolute;
+        z-index: 5;
+        top: 69px;
+        right: 18px;
+        left: 18px;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: #10151d;
+      }
+      .nav.is-open { display: flex; flex-direction: column; }
+      .nav a { padding: 12px; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 12px; padding-block: 76px 58px; }
+      .hero-copy { font-size: 14px; }
+      .visual { min-height: 290px; }
+      .orbit { width: 205px; height: 205px; }
+      .shield { width: 88px; height: 105px; }
+      .orbit-label { right: -38px; bottom: 25px; font-size: 9px; }
+      .section { padding-block: 64px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 27px; }
+      .about-grid, .approach { grid-template-columns: 1fr; gap: 28px; }
+      .about-grid { gap: 22px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-card { min-height: 0; }
+      .skill-icon { margin-bottom: 14px; }
+      .approach-copy { padding: 28px 24px; }
+      .terminal { min-height: 220px; border-top: 1px solid var(--line); border-left: 0; padding: 24px; font-size: 10px; }
+      .contact-card { align-items: start; flex-direction: column; padding: 28px 24px; }
+      .contact-note { text-align: left; }
+      .footer-inner { align-items: start; flex-direction: column; justify-content: center; padding-block: 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#home" aria-label="Obidjon Bozorov — bosh sahifa">
+      <span class="brand-mark">OB</span>
+      <span>obidjon<span style="color: var(--accent)">.dev</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menyu</button>
+    <nav class="nav" id="site-nav" aria-label="Asosiy navigatsiya">
+      <a href="#about">Men haqimda</a>
+      <a href="#expertise">Yo‘nalishlar</a>
+      <a href="#approach">Yondashuv</a>
+      <a class="nav-contact" href="#contact">Bog‘lanish <span class="arrow">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="status-dot"></span> Kiberxavfsizlik mutaxassisi</div>
+        <h1>Raqamli dunyoni<br><span>xavfsizroq</span> qilamiz.</h1>
+        <p class="hero-copy">Men Obidjon Bozorov — tizimlar va ma’lumotlarni himoya qilishga ixtisoslashgan kiberxavfsizlik mutaxassisiman. Xavfsizlikni murakkablik emas, ishonch poydevori deb bilaman.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#expertise">Yo‘nalishlarim <span class="arrow">↓</span></a>
+          <a class="button" href="#about">Men haqimda <span class="arrow">↗</span></a>
+        </div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="visual-grid"></div>
+        <div class="orbit">
+          <svg class="shield" viewBox="0 0 100 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 4L91 19V48C91 76 74 99 50 112C26 99 9 76 9 48V19L50 4Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M50 17L79 28V49C79 69 67 86 50 96C33 86 21 69 21 49V28L50 17Z" stroke="currentColor" stroke-opacity=".38"/>
+            <path d="M50 37V62" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="50" cy="73" r="2" fill="currentColor"/>
+          </svg>
+          <span class="orbit-label">SECURITY / FIRST</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-heading reveal">
+          <div>
+            <div class="section-kicker">01 / Men haqimda</div>
+            <h2>Himoya — bu jarayon.</h2>
+          </div>
+          <p class="section-intro">Kuchli kiberxavfsizlik bir martalik sozlama emas. U puxta tahlil, to‘g‘ri ustuvorlik va izchil takomillashtirishdan boshlanadi.</p>
+        </div>
+        <div class="about-grid reveal">
+          <div class="about-text">
+            <p><strong>Obidjon Bozorov.</strong> Kiberxavfsizlik sohasida tahdidlarni tushunish va ularning oldini olishga qaratilgan yechimlar ustida ishlayman.</p>
+            <p>Maqsadim — texnologiyalarni xavfsizroq qilish bilan birga, xavfsizlik choralarini tushunarli va amalda qo‘llash mumkin bo‘lgan shaklda taqdim etish.</p>
+          </div>
+          <div class="principles" aria-label="Ish tamoyillari">
+            <div class="principle"><span class="principle-index">01</span> Dalillarga asoslangan tahlil</div>
+            <div class="principle"><span class="principle-index">02</span> Xavfni ustuvorlik bo‘yicha kamaytirish</div>
+            <div class="principle"><span class="principle-index">03</span> Mas’uliyatli va tushunarli yondashuv</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="expertise">
+      <div class="wrap">
+        <div class="section-heading reveal">
+          <div>
+            <div class="section-kicker">02 / Yo‘nalishlar</div>
+            <h2>Xavfsizlikka yaxlit qarash.</h2>
+          </div>
+          <p class="section-intro">Tahdidlarni aniqlashdan himoyani kuchaytirishgacha — barqaror xavfsizlik uchun muhim yo‘nalishlar.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <div class="skill-icon" aria-hidden="true">⌘</div>
+            <h3>Xavfsizlik tahlili</h3>
+            <p>Tizim va jarayonlardagi xatarlarni aniqlash, ta’sirini baholash hamda muhim ustuvorliklarni belgilash.</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-icon" aria-hidden="true">⌁</div>
+            <h3>Himoya va mustahkamlash</h3>
+            <p>Zaif konfiguratsiyalarni kamaytirish, himoya qatlamlarini yaxshilash va xavfsiz amaliyotlarni tatbiq etish.</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-icon" aria-hidden="true">↗</div>
+            <h3>Hodisalarga tayyorgarlik</h3>
+            <p>Xavfsizlik hodisalarini kuzatish va ularga izchil, muvofiqlashtirilgan javob berish jarayonlarini qo‘llab-quvvatlash.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-heading reveal">
+          <div>
+            <div class="section-kicker">03 / Yondashuv</div>
+            <h2>Amaliy. Aniq. Mas’uliyatli.</h2>
+          </div>
+        </div>
+        <div class="approach reveal">
+          <div class="approach-copy">
+            <div class="section-kicker">Ish tamoyilim</div>
+            <h3>Xavfsizlik qarorlarini tushunarli qilaman.</h3>
+            <p>Har bir tavsiya real xavf va kutilayotgan ta’sir bilan bog‘liq bo‘lishi kerak. Shunda jamoa nimani, nima uchun va qaysi tartibda bajarishni aniq biladi.</p>
+          </div>
+          <div class="terminal" aria-label="Xavfsizlik ish jarayoni">
+            <div class="terminal-bar"><i></i><i></i><i></i></div>
+            <div class="terminal-line"><span>&gt;</span> tahlil <b>→</b> aniqlash</div>
+            <div class="terminal-line"><span>&gt;</span> ustuvorlik <b>→</b> baholash</div>
+            <div class="terminal-line"><span>&gt;</span> himoya <b>→</b> mustahkamlash</div>
+            <div class="terminal-line"><span>&gt;</span> takomillashtirish<span class="terminal-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap contact-section" id="contact">
+      <div class="contact-card reveal">
+        <div>
+          <div class="section-kicker">Hamkorlik</div>
+          <h2>Xavfsizlik haqida suhbatlashamiz.</h2>
+          <p>Kiberxavfsizlik, hamkorlik yoki professional mavzudagi takliflar uchun men bilan bog‘laning.</p>
+        </div>
+        <div class="contact-note">
+          <strong>Aloqa ma’lumotlari</strong>
+          Sayt egasi tomonidan qo‘shiladi
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span class="footer-mark">OB / Kiberxavfsizlik</span>
+      <span>© <span id="year"></span> Obidjon Bozorov. Barcha huquqlar himoyalangan.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
